@@ -1,0 +1,53 @@
+<template>
+  <div class="py-3 px-2 mb-1">
+    <file-pond
+      name="test"
+      ref="pond"
+      label-idle="Drop files here..."
+      v-bind:allow-multiple="true"
+      accepted-file-types="image/jpeg, image/png"
+      :instant-upload="false"
+      v-bind:files="myFiles"
+      @addfile="onAddfile"
+    />
+  </div>
+</template>
+
+<script>
+import vueFilePond from "vue-filepond";
+import "filepond/dist/filepond.min.css";
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css";
+import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+
+const FilePond = vueFilePond(
+  FilePondPluginFileValidateType,
+  FilePondPluginImagePreview
+);
+
+export default {
+  components: {
+    FilePond,
+  },
+  data: function () {
+    return {
+      myFiles: [],
+    };
+  },
+  methods: {
+    onAddfile(err, file) {
+      let fileInput = file.file;
+      this.myFiles.push(fileInput);
+    },
+    removeFile() {
+      this.$refs.pond.removeFile();
+    },
+    removeFiles() {
+      this.$refs.pond.files?.forEach((file, idx) => {
+        this.$refs.pond.removeFile(idx);
+      });
+      this.myFiles = [];
+    },
+  },
+};
+</script>

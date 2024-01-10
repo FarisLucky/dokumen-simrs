@@ -1,0 +1,99 @@
+body {
+    font-size: 11px !important;
+}
+
+.bg-success-cs {
+    background-color: #55d6c2 !important
+}
+
+/**
+* VUE SELECT
+**/
+.vs__dropdown-toggle {
+    padding: .26rem 0;
+}
+
+/**
+* Transition vue js
+* */
+.fade-x-enter-from,
+.fade-x-leave-to {
+    opacity: 0;
+    transform: translateX(10px);
+}
+
+.fade-x-enter-active,
+.fade-x-leave-active {
+    transition: opacity 0.2s, transform 0.3s;
+}
+
+/**
+* Good table vue
+*/
+table.vgt-table {
+    font-size: 12px !important;
+}
+
+.vgt-wrap__footer,
+.vgt-wrap__footer .footer__navigation,
+.vgt-wrap__footer .footer__navigation__page-btn span,
+.vgt-wrap__footer .footer__row-count__select,
+button,
+label,
+select,
+textarea,
+input {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+}
+
+.form-control {
+    padding: 0.3rem 0.45rem !important;
+    height: 34px !important;
+    border-radius: 4px !important;
+}
+
+.btn {
+    height: 34px !important;
+    border-radius: 4px !important;
+    margin-bottom: 0px;
+}
+
+.vgt-table thead th,
+.vgt-table th.line-numbers,
+.vgt-table th.vgt-checkbox-col {
+    background: #fff;
+}
+
+.vgt-wrap__footer,
+.vs__dropdown-toggle {
+    background: #fff !important;
+}
+
+.form-control {
+    padding: 0.3rem 0.45rem !important;
+    height: 40px !important;
+    border-radius: 4px !important;
+}
+
+.btn {
+    height: 40px !important;
+    border-radius: 4px !important;
+}
+
+.h-container {
+    height: 85vh;
+}
+
+.vs__dropdown-toggle {
+    padding: .26rem 0;
+    height: 34px !important;
+}
+
+.card {
+    border-radius: .3rem !important;
+}
+
+.navbar-vertical.navbar-expand-xs {
+    z-index: 998 !important;
+}
