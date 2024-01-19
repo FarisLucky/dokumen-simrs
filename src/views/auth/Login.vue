@@ -96,7 +96,7 @@ import { mapActions, mapState } from "pinia";
 import Cookies from "js-cookie";
 import Navbar from "@/examples/PageLayout/Navbar.vue";
 import ArgonButton from "@/components/ArgonButton.vue";
-import { useAppStore } from "../../store/index_pinia";
+import { useAppStore } from "@/store/index_pinia";
 const body = document.getElementsByTagName("body")[0];
 
 export default {

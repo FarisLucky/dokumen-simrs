@@ -63,6 +63,8 @@ class DokumenController extends Controller
 
             DB::beginTransaction();
 
+            $user = auth()->user();
+
             $pasien = SimRegister::with('pasien')
                 ->where('REGISTER', $request->register)
                 ->first();
@@ -75,8 +77,10 @@ class DokumenController extends Controller
 
             $fileRequest = array_merge($fileRequest, [
                 'register' => $pasien->REGISTER,
-                'created_by' => 1,
-                'created_by_name' => 'Salman',
+                'created_by' => $user->id,
+                'created_by_name' => $user->name,
+                'created_by_ruangan' => $user->ruangan,
+                'created_by_level' => $user->level,
                 'tgl_mrs' => $pasien->TANGGAL,
                 'mr' => $pasien->MR,
                 'nama' => $pasien->pasien->NAMA,

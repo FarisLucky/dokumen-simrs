@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'username',
         'email',
+        'ruangan',
+        'level',
         'password',
         'role',
         'api_key',

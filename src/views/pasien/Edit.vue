@@ -107,7 +107,7 @@
 
 <script>
 import pasienService from "@/services/pasienService";
-import { useAuthStore } from "../../store/auth";
+import { useAuthStore } from "@/store/auth";
 import { httpWeb } from "@/config/http";
 
 export default {
@@ -122,12 +122,10 @@ export default {
         tanggal: "",
         diagnosa: "",
       },
-      superAdmin: false,
     };
   },
   created() {
     this.onRefresh();
-    this.superAdmin = useAuthStore().getUser().role === "ADMIN";
   },
   methods: {
     getRouteWeb(id) {

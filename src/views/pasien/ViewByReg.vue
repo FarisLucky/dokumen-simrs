@@ -67,7 +67,7 @@
       <div class="row">
         <div class="col-lg-12">
           <form-upload
-            v-if="isAdmin"
+            v-if="isLoggedIn"
             @fetch="fetchData"
             :regist="register"
             ref="formUpload"
@@ -106,7 +106,7 @@
                 <div class="title-cover">
                   <h6 class="title">{{ row.nama_dok }}</h6>
                   <a
-                    v-if="isAdmin"
+                    v-if="isLoggedIn"
                     href="javascript(0)"
                     @click.prevent="onDestroy(row.id)"
                     class="btn btn-danger"
@@ -176,7 +176,7 @@ export default {
       isLoading: false,
       adaBerkas: false,
       rows: [],
-      isAdmin: false,
+      isLoggedIn: false,
       totalRecords: 0,
       register: null,
     };
@@ -191,7 +191,7 @@ export default {
   created() {
     this.register = this.$route.params.register;
     this.fetchData();
-    this.isAdmin = useAuthStore().getUser().role === "ADMIN";
+    this.isLoggedIn = useAuthStore().getLoggedIn();
   },
   methods: {
     getRouteWeb(id) {

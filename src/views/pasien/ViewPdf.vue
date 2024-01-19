@@ -55,10 +55,10 @@ img {
   </div>
 </template>
 <script>
-import { http } from "../../config/http";
+import { http } from "@/config/http";
 import { httpWeb } from "@/config/http";
 import { Modal } from "bootstrap";
-import { useAuthStore } from "../../store/auth";
+import { useAuthStore } from "@/store/auth";
 
 export default {
   props: ["id_file"],

@@ -129,14 +129,12 @@ export default {
       isLoading: false,
       dir: false,
       rows: [],
-      superAdmin: false,
       totalRecords: 0,
       FolderThumb,
     };
   },
   created() {
     this.fetchData();
-    this.superAdmin = useAuthStore().getUser().role === "ADMIN";
   },
   methods: {
     getRouteWeb(id) {

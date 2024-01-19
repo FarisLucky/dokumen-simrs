@@ -129,7 +129,6 @@
 <script>
 import dokumenService from "@/services/dokumenService";
 import { httpWeb } from "@/config/http";
-import { useAuthStore } from "@/store/auth";
 import FolderThumb from "@/assets/img/folder-list.png";
 import Filter from "./Filter.vue";
 
@@ -138,13 +137,10 @@ export default {
     Filter,
   },
   data() {
-    const superAdmin = useAuthStore().getUser().role === "ADMIN";
-
     return {
       isLoading: false,
       dir: false,
       rows: [],
-      superAdmin,
       totalRecords: 0,
       FolderThumb,
     };

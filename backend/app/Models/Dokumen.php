@@ -30,6 +30,8 @@ class Dokumen extends Model
         'sumber',
         'created_by',
         'created_by_name',
+        'created_by_ruangan',
+        'created_by_level',
     ];
 
     public $casts = [

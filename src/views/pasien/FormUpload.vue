@@ -52,7 +52,7 @@
             ></v-select>
           </div>
         </div>
-        <div class="col-lg">
+        <div class="col-lg-12">
           <div class="mb-1">
             <label for="upload">Upload Gambar</label>
             <UploadFilepond ref="filepond"></UploadFilepond>
@@ -93,14 +93,20 @@ import DatePicker from "vue-datepicker-next";
 import "vue-datepicker-next/index.css";
 import dokumenService from "../../services/dokumenService";
 import UploadFilepond from "@/views/pasien/UploadFilepond";
+import { useAuthStore } from "@/store/auth";
+import { RAJAL, RANAP, PENDAFTARAN, ADMIN } from "@/utils/authUtils";
 
 const initState = () => ({
   form: {
-    nama: "",
+    nama_dok: "",
     tgl_periksa: "",
     penunjang: "",
     file: null,
+    sumber: "",
   },
+  method: "POST",
+  userLevel: null,
+  isAdmin: null,
 });
 
 export default {
@@ -110,17 +116,11 @@ export default {
   },
   props: ["regist"],
   data() {
-    return {
-      form: {
-        id: "",
-        nama_dok: "",
-        tgl_periksa: "",
-        penunjang: "",
-        file: null,
-        sumber: "",
-      },
-      method: "POST",
-    };
+    return initState();
+  },
+  created() {
+    this.userLevel = useAuthStore().getUser().level;
+    this.isAdmin = useAuthStore().getUser().role === ADMIN;
   },
   methods: {
     async onSubmit() {
@@ -202,6 +202,18 @@ export default {
     clear() {
       Object.assign(this.$data, initState());
       this.$refs.filepond.removeFiles();
+    },
+
+    levelRajal() {
+      return this.userLevel === RAJAL;
+    },
+
+    levelRanap() {
+      return this.userLevel === RANAP;
+    },
+
+    levelPendaftaran() {
+      return this.userLevel === PENDAFTARAN;
     },
   },
 };

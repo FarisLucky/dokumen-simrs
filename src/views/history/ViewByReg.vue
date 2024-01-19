@@ -151,7 +151,6 @@
 <script>
 import dokumenService from "@/services/dokumenService";
 import { httpWeb } from "@/config/http";
-import { useAuthStore } from "@/store/auth";
 import { defineAsyncComponent } from "vue";
 
 export default {
@@ -160,13 +159,10 @@ export default {
     EditImage: defineAsyncComponent(() => import("./EditImage.vue")),
   },
   data() {
-    const isAdmin = useAuthStore().getUser().role === "ADMIN";
-
     return {
       isLoading: false,
       adaBerkas: false,
       rows: [],
-      isAdmin,
       totalRecords: 0,
       register: null,
     };

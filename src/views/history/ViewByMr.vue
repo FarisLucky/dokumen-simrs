@@ -119,19 +119,15 @@
 <script>
 import dokumenService from "@/services/dokumenService";
 import { httpWeb } from "@/config/http";
-import { useAuthStore } from "@/store/auth";
 import FolderThumb from "@/assets/img/folder.jpg";
 
 export default {
   name: "pasien-table",
   data() {
-    const superAdmin = useAuthStore().getUser().role === "ADMIN";
-
     return {
       isLoading: false,
       dir: false,
       rows: [],
-      superAdmin,
       totalRecords: 0,
       FolderThumb,
     };
