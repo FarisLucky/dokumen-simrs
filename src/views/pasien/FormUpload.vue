@@ -91,7 +91,7 @@
 <script>
 import DatePicker from "vue-datepicker-next";
 import "vue-datepicker-next/index.css";
-import dokumenService from "../../services/dokumenService";
+import dokumenService from "@/services/dokumenService";
 import UploadFilepond from "@/views/pasien/UploadFilepond";
 import { useAuthStore } from "@/store/auth";
 import { RAJAL, RANAP, PENDAFTARAN, ADMIN } from "@/utils/authUtils";

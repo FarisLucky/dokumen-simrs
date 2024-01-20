@@ -37,12 +37,10 @@
   padding: 0.3rem;
 }
 .subtitle-tgl {
-  font-weight: 800;
   padding-right: 0.5rem;
 }
 .subtitle-penunjang {
   display: inline-block;
-  font-weight: 900;
   border-radius: 5px;
 }
 .subtitle-penunjang span {
@@ -59,6 +57,17 @@
 .title-cover {
   display: flex;
   justify-content: space-between;
+}
+.subtitle .ruangan {
+  background: linear-gradient(
+    90deg,
+    hsla(205, 46%, 30%, 1) 0%,
+    hsla(260, 29%, 36%, 1) 100%
+  );
+  color: white;
+  padding: 0.4rem;
+  border-radius: 4px;
+  font-weight: 600;
 }
 </style>
 <template>
@@ -109,7 +118,7 @@
                     v-if="isLoggedIn"
                     href="javascript(0)"
                     @click.prevent="onDestroy(row.id)"
-                    class="btn btn-danger"
+                    class="text-danger"
                   >
                     <i
                       class="fa fa-times"
@@ -118,9 +127,13 @@
                   </a>
                 </div>
                 <div class="subtitle-cover">
-                  <p class="subtitle">- Sumber: {{ row.sumber }} </p>
-                  <p class="subtitle-tgl">- Tgl Periksa: {{ row.tgl_periksa }}</p>
-                  <p class="subtitle-penunjang">- Penunjang: <span>{{ row.penunjang }}</span></p>
+                  <p class="subtitle">- Sumber: <strong>{{ row.sumber }}</strong> </p>
+                  <p class="subtitle-tgl">- Tgl Periksa: <strong>{{ row.tgl_periksa }}</strong></p>
+                  <p class="subtitle-penunjang">- Penunjang: <strong>{{ row.penunjang }}</strong></p>
+                  <p
+                    v-if="row.created_by_ruangan !== null"
+                    class="subtitle"
+                  >- <strong class="ruangan">{{ row.created_by_ruangan }}</strong></p>
                 </div>
                 <div class="footer-cover">
                   <router-link

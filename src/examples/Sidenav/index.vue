@@ -1,12 +1,12 @@
 <style scoped>
 .name-login {
-  padding: 0.5rem 1rem;
-  position: relative;
+  padding: 0.2rem;
   font-size: 13px;
   font-weight: 700;
   border-radius: 4px;
   background: rgb(85, 213, 193);
   color: rgb(214, 107, 107);
+  display: inline-block;
 }
 </style>
 <template>
@@ -64,7 +64,7 @@
         class="my-3 text-center"
         v-if="setting.isPinned"
       >
-        <span class="name-login">User: {{ user.name }}</span>
+        <span class="name-login">{{ user.name }}<br />({{ user.ruangan }})</span>
       </div>
     </transition>
     <sidenav-list :cardBg="custom_class" />

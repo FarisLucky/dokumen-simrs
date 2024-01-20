@@ -37,12 +37,10 @@
   padding: 0.3rem;
 }
 .subtitle-tgl {
-  font-weight: 800;
   padding-right: 0.5rem;
 }
 .subtitle-penunjang {
   display: inline-block;
-  font-weight: 900;
   border-radius: 5px;
 }
 .subtitle-penunjang span {
@@ -55,6 +53,20 @@
 .bg-cover {
   border-radius: 5px;
   background: #f8f9fa;
+}
+.title-cover {
+  margin-bottom: 0.5rem;
+}
+.title-cover i {
+  background: linear-gradient(
+    90deg,
+    hsla(205, 46%, 30%, 1) 0%,
+    hsla(260, 29%, 36%, 1) 100%
+  );
+  color: white;
+  padding: 0.4rem;
+  border-radius: 4px;
+  font-weight: 600;
 }
 </style>
 <template>
@@ -91,14 +103,15 @@
             </div>
             <div class="card-body">
               <div class="mb-1 cover">
-                <div class="title-cover">
+                <div class="title-cover d-flex justify-content-between">
                   <h6 class="title">{{ row.nama_dok }}</h6>
+                  <i v-if="row.created_by_ruangan !== null">{{ row.created_by_ruangan }}</i>
                 </div>
                 <div class="subtitle-cover">
-                  <p class="subtitle">- Info: <br />{{ row.mr }} - {{ row.nama }} </p>
-                  <p class="subtitle">- Sumber: {{ row.sumber }} </p>
-                  <p class="subtitle-tgl">- Tgl Periksa: {{ row.tgl_periksa }}</p>
-                  <p class="subtitle-penunjang">- Penunjang: <span>{{ row.penunjang }}</span></p>
+                  <p class="subtitle">- <strong>{{ row.nama }} ({{ row.mr }})</strong> </p>
+                  <p class="subtitle">- Sumber: <strong>{{ row.sumber }}</strong> </p>
+                  <p class="subtitle-tgl">- Tgl Periksa: <strong>{{ row.tgl_periksa }}</strong></p>
+                  <p class="subtitle-penunjang">- Penunjang: <b>{{ row.penunjang }}</b></p>
                 </div>
                 <div class="footer-cover">
                   <a

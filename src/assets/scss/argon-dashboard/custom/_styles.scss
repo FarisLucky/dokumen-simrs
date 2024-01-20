@@ -3,7 +3,8 @@ body {
 }
 
 .bg-success-cs {
-    background-color: #55d6c2 !important
+    background: linear-gradient(90deg, hsla(171, 61%, 59%, 1) 0%, hsla(168, 93%, 73%, 1) 100%);
+    // background-color: #55d6c2 !important
 }
 
 /**
@@ -45,17 +46,16 @@ textarea,
 input {
     font-size: 12px !important;
     font-weight: 600 !important;
-    height: 40px !important;
 }
 
 .form-control {
-    padding: 0.3rem 0.45rem !important;
-    height: 34px !important;
+    padding: 0.2rem 0.35rem !important;
+    height: 38px !important;
     border-radius: 4px !important;
 }
 
 .btn {
-    height: 34px !important;
+    height: 38px !important;
     border-radius: 4px !important;
     margin-bottom: 0px;
 }
@@ -71,23 +71,13 @@ input {
     background: #fff !important;
 }
 
-.form-control {
-    padding: 0.3rem 0.45rem !important;
-    height: 40px !important;
-    border-radius: 4px !important;
-}
-
-.btn {
-    height: 40px !important;
-    border-radius: 4px !important;
-}
-
 .h-container {
     height: 85vh;
 }
 
 .vs__dropdown-toggle {
     padding: .26rem 0;
+    height: 38px !important;
 }
 
 .card {
@@ -96,4 +86,8 @@ input {
 
 .navbar-vertical.navbar-expand-xs {
     z-index: 998 !important;
+}
+
+.mx-input {
+    height: 38px !important;
 }

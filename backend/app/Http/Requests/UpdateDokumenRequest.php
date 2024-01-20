@@ -25,7 +25,7 @@ class UpdateDokumenRequest extends FormRequest
     {
         return [
             'nama_dok' => ['required'],
-            'tgl_periksa' => ['required'],
+            'tgl_periksa' => [''],
             'penunjang' => ['required'],
             'sumber' => ['required'],
         ];
