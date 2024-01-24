@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\JenisController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\Web\PdfController;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +36,8 @@ Route::middleware('auth:sanctum')->group(function () {
         ->name('pdf.generateId');
     Route::put('update-password', [LoginController::class, 'updatePassword'])
         ->name('login.update_password');
+    Route::get('jenis', [JenisController::class, 'index'])
+        ->name('jenis.index');
 });
 Route::get('dashboard', [DashboardController::class, 'index'])
     ->name('pdf.generateId');

@@ -34,9 +34,9 @@
         </div>
         <div class="col-lg-3">
           <div class="mb-1">
-            <label for="penunjang">Penunjang</label>
+            <label for="penunjang">Jenis</label>
             <v-select
-              :options="['RADIOLOGI', 'LABORATORIUM', 'LAINNYA']"
+              :options="listJenis"
               v-model="form.penunjang"
               placeholder="Pilih Penunjang"
             ></v-select>
@@ -107,6 +107,7 @@ const initState = () => ({
   method: "POST",
   userLevel: null,
   isAdmin: null,
+  listJenis: ["RADIOLOGI", "LABORATORIUM", "LAINNYA"],
 });
 
 export default {
@@ -175,9 +176,7 @@ export default {
             });
             alert(txt);
           } else {
-            alert(
-              err.response.data.message + ": " + err.response.data?.error?.msg
-            );
+            alert(err.response.data.message + ": " + err.response.data?.error);
           }
           this.$Progress.fail();
         });

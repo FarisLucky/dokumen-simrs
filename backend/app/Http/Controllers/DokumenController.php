@@ -87,11 +87,6 @@ class DokumenController extends Controller
                 'tgl_lahir' => $pasien->pasien->TGL_LAHIR,
             ]);
 
-            $check = Dokumen::where(['register' => $pasien->REGISTER, 'nama_dok' => $request->nama_dok])->first();
-
-            if (!is_null($check)) {
-                throw new \Exception('File sudah ada');
-            }
             $dokumen = Dokumen::create($fileRequest);
 
             /**
@@ -104,7 +99,7 @@ class DokumenController extends Controller
                 $files = $request->file('files');
                 $uploadService = new FileUploadService();
                 $filesPayload = [];
-                $rules = ['file' => ['required', 'image', 'max:2048']];
+                $rules = ['file' => ['required', 'mimes:jpeg,bmp,png,gif,svg,pdf', 'max:4048']];
                 foreach ($files as $key => $file) {
 
                     /**
@@ -151,10 +146,7 @@ class DokumenController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
 
-            return $this->errorApiResponse([
-                'msg' => $th->getMessage(),
-                'trace' => $th->getTraceAsString()
-            ]);
+            return $this->errorApiResponse($th->getMessage());
         }
     }
 
