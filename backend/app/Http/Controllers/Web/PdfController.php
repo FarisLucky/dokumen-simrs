@@ -59,4 +59,11 @@ class PdfController extends Controller
 
         return $pdf->download($files->register . '_' . $files->mr . '_' . $files->nama_dok . '.pdf');
     }
+
+    public function pdfTypeDownload($id)
+    {
+        $file = Filepond::where('id_file', $id)->first();
+
+        return response()->download($file->path_doc);
+    }
 }

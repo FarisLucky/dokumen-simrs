@@ -105,7 +105,7 @@
             <div class="card-header">
               <div class="mb-1 header-img-cover">
                 <img
-                  v-lazy="routeImg(row.id)"
+                  v-lazy="isPdf(row.filepond[0].extension) ? pdfThumb : routeImg(row.id)"
                   class="header-img"
                 >
               </div>
@@ -137,6 +137,7 @@
                 </div>
                 <div class="footer-cover">
                   <router-link
+                    v-if="!isPdf(row.filepond[0].extension)"
                     :to="'/pasien/dokumen/' + row.id"
                     target="_blank"
                     class="btn btn-success mx-2"
@@ -149,6 +150,19 @@
                     Lihat
                   </router-link>
                   <a
+                    v-if="isPdf(row.filepond[0].extension)"
+                    :href="getPdfRouteWeb(row.id)"
+                    target="_blank"
+                    class="btn btn-danger"
+                  >
+                    <i
+                      class="fa fa-file-pdf-o"
+                      aria-hidden="true"
+                    ></i>
+                    Download
+                  </a>
+                  <a
+                    v-else
                     :href="getRouteWeb(row.id)"
                     target="_blank"
                     class="btn btn-danger"
@@ -176,6 +190,7 @@ import { httpWeb } from "@/config/http";
 import { useAuthStore } from "@/store/auth";
 import { defineAsyncComponent } from "vue";
 import Cookies from "js-cookie";
+import pdfThumb from "@/assets/gif/pdf.gif";
 
 export default {
   components: {
@@ -192,6 +207,8 @@ export default {
       isLoggedIn: false,
       totalRecords: 0,
       register: null,
+      pdfThumb,
+      pdfExt: "pdf",
     };
   },
   mounted() {
@@ -215,6 +232,12 @@ export default {
     },
     detailDokumen(id) {
       this.$refs.modalViewRef.showModal(id);
+    },
+    getPdfRouteWeb(id) {
+      return `${httpWeb}/pasien/${id}/pdf-type-download`;
+    },
+    isPdf(ext) {
+      return ext === this.pdfExt;
     },
     async fetchData() {
       this.$Progress.start();

@@ -13,11 +13,10 @@ class AddColumnToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('ruangan', 50)->nullable();
-            $table->string('level', 50)->nullable();
-
-        });
+        // Schema::table('users', function (Blueprint $table) {
+        //     $table->string('ruangan', 50)->nullable();
+        //     $table->string('level', 50)->nullable();
+        // });
     }
 
     /**

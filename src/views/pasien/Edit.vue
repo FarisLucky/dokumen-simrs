@@ -10,10 +10,10 @@
             <div class="row px-3">
               <div class="col-md-4 col-lg-2">
                 <div class="mb-1">
-                  <label for="mr">Nama</label>
+                  <label for="nama">Nama</label>
                   <input
                     type="text"
-                    id="mr"
+                    id="nama"
                     class="form-control"
                     v-model="form.nama"
                     :disabled="true"
@@ -46,10 +46,10 @@
               </div>
               <div class="col-md-4 col-lg-2">
                 <div class="mb-1">
-                  <label for="mr">Tgl Lahir</label>
+                  <label for="tgl_lahir">Tgl Lahir</label>
                   <input
                     type="text"
-                    id="mr"
+                    id="tgl_lahir"
                     class="form-control"
                     v-model="form.tgl_lahir"
                     :disabled="true"
@@ -58,10 +58,10 @@
               </div>
               <div class="col-md-4 col-lg-2">
                 <div class="mb-1">
-                  <label for="mr">Tgl MRS</label>
+                  <label for="tgl_mrs">Tgl MRS</label>
                   <input
                     type="text"
-                    id="mr"
+                    id="tgl_mrs"
                     class="form-control"
                     v-model="form.tanggal"
                     style="border: 3px solid rgb(214,107,107);"

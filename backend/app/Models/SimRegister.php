@@ -31,6 +31,14 @@ class SimRegister extends Model
         return $query->selectRaw('daftar.MR as daftar_MR, daftar.REGISTER as daftar_REGISTER, daftar.DIAGNOSA_MRS as daftar_DIAGNOSA_MRS, daftar.TANGGAL as daftar_TANGGAL');
     }
 
+    public function scopeRanap($query)
+    {
+        return $query->where(function ($query) {
+            $query->where('FLAG', SimRegister::NEW_IRJA)
+                ->OrWhere('FLAG', SimRegister::OLD_IRJA);
+        });
+    }
+
     public function pasien(): HasOne
     {
         return $this->hasOne(SimPasien::class, 'MR', 'MR');

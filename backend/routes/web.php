@@ -24,6 +24,7 @@ Route::get('/pasien/{id}/pdf', [PdfController::class, 'show'])->name('pdf.show')
 Route::get('/pasien/{id}/thumbnail', [PdfController::class, 'showThumbnail'])->name('pdf.showThumbnail');
 Route::get('/pasien/{id}/pdf-convert', [PdfController::class, 'convert'])->name('pdf.convert');
 Route::get('/pasien/{id}/pdf-download', [PdfController::class, 'convertDomPdf'])->name('pdf.convertDomPdf');
+Route::get('/pasien/{id}/pdf-type-download', [PdfController::class, 'pdfTypeDownload'])->name('pdf.pdfTypeDownload');
 Route::get('/folders/{mr}', function ($mr) {
     $doc = Dokumen::where('mr', $mr)->first();
     $directory = Storage::disk('public')->allFiles("/berkas/" . $doc->mr);

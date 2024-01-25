@@ -30,7 +30,7 @@ class HistoryController extends Controller
     {
         try {
 
-            $dokumens = Dokumen::query();
+            $dokumens = Dokumen::with('filepond');
 
             if (!is_null($reg)) {
                 $dokumens->where('register', "$reg");

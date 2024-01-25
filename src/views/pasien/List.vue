@@ -6,62 +6,56 @@
 </style>
 <template>
   <div>
-    <div class="mb-2 rounded p-2">
-      <span class="mb-0 text-white title">Harian Rawat Jalan</span>
+    <div class="mb-1">
+      <h5 class="py-2">Rawat Jalan &#60; dari 1 Tahun</h5>
     </div>
-    <div class="card h-100">
-      <div class="card-body px-0 pt-0 pb-2">
-        <div class="py-3 px-2">
-          <vue-good-table
-            mode="remote"
-            :totalRows="totalRecords"
-            :pagination-options="paginations"
-            :isLoading="isLoading"
-            :columns="columns"
-            :rows="rows"
-            :line-numbers="true"
-            styleClass="vgt-table striped"
-            v-on:page-change="onPageChange"
-            v-on:per-page-change="onPerPageChange"
-            v-on:column-filter="onColumnFilter"
-            v-on:sort-change="onSortChange"
-          >
-            <template #table-row="props">
-              <span v-if="props.column.field == 'action'">
-                <router-link
-                  :to="{
+    <vue-good-table
+      mode="remote"
+      :totalRows="totalRecords"
+      :pagination-options="paginations"
+      :isLoading="isLoading"
+      :columns="columns"
+      :rows="rows"
+      :line-numbers="true"
+      styleClass="vgt-table striped"
+      v-on:page-change="onPageChange"
+      v-on:per-page-change="onPerPageChange"
+      v-on:column-filter="onColumnFilter"
+      v-on:sort-change="onSortChange"
+    >
+      <template #table-row="props">
+        <span v-if="props.column.field == 'action'">
+          <router-link
+            :to="{
                     name: 'ViewByReg',
                     params: {
                       register: props.row.daftar_REGISTER,
                     },
                   }"
-                  class="text-info me-1"
-                >
-                  <i class="fa fa-pencil"></i>
-                </router-link>
-                <router-link
-                  :to="{
+            class="text-info me-1"
+          >
+            <i class="fa fa-pencil"></i>
+          </router-link>
+          <router-link
+            :to="{
                     name: 'ViewByMr',
                     params: {
                       mr: props.row.daftar_MR,
                     },
                   }"
-                  class="text-secondary me-1"
-                >
-                  <i class="fa fa-user"></i>
-                </router-link>
-                <a
-                  href="javascript(0)"
-                  class="text-danger"
-                >
-                  <i class="fa fa-trash-o"></i>
-                </a>
-              </span>
-            </template>
-          </vue-good-table>
-        </div>
-      </div>
-    </div>
+            class="text-secondary me-1"
+          >
+            <i class="fa fa-user"></i>
+          </router-link>
+          <a
+            href="javascript(0)"
+            class="text-danger"
+          >
+            <i class="fa fa-trash-o"></i>
+          </a>
+        </span>
+      </template>
+    </vue-good-table>
   </div>
 </template>
 

@@ -34,7 +34,8 @@
   font-size: 12px;
   letter-spacing: 1px;
   margin-bottom: 2px;
-  padding: 0.3rem;
+  padding: 0 0.3rem;
+  border-bottom: 1px solid #69696980;
 }
 .subtitle-tgl {
   padding-right: 0.5rem;
@@ -42,6 +43,7 @@
 .subtitle-penunjang {
   display: inline-block;
   border-radius: 5px;
+  display: block;
 }
 .subtitle-penunjang span {
   padding: 0.1rem;
@@ -57,7 +59,7 @@
 .title-cover {
   margin-bottom: 0.5rem;
 }
-.title-cover i {
+i.by-ruangan {
   background: linear-gradient(
     90deg,
     hsla(205, 46%, 30%, 1) 0%,
@@ -67,6 +69,7 @@
   padding: 0.4rem;
   border-radius: 4px;
   font-weight: 600;
+  display: inline-block;
 }
 </style>
 <template>
@@ -96,7 +99,7 @@
             <div class="card-header">
               <div class="mb-1 header-img-cover">
                 <img
-                  v-lazy="routeImg(row.id)"
+                  v-lazy="isPdf(row.filepond[0].extension) ? pdfThumb : routeImg(row.id)"
                   class="header-img"
                 >
               </div>
@@ -105,28 +108,20 @@
               <div class="mb-1 cover">
                 <div class="title-cover d-flex justify-content-between">
                   <h6 class="title">{{ row.nama_dok }}</h6>
-                  <i v-if="row.created_by_ruangan !== null">{{ row.created_by_ruangan }}</i>
                 </div>
                 <div class="subtitle-cover">
                   <p class="subtitle">- <strong>{{ row.nama }} ({{ row.mr }})</strong> </p>
                   <p class="subtitle">- Sumber: <strong>{{ row.sumber }}</strong> </p>
                   <p class="subtitle-tgl">- Tgl Periksa: <strong>{{ row.tgl_periksa }}</strong></p>
                   <p class="subtitle-penunjang">- Penunjang: <b>{{ row.penunjang }}</b></p>
+                  <i
+                    class="by-ruangan"
+                    v-if="row.created_by_ruangan !== null"
+                  >{{ row.created_by_ruangan }}</i>
                 </div>
                 <div class="footer-cover">
                   <a
-                    href="javascript(0)"
-                    target="_blank"
-                    class="btn btn-success"
-                    @click.prevent="detailDokumen(row.id)"
-                  >
-                    <i
-                      class="fa fa-eye"
-                      aria-hidden="true"
-                    ></i>
-                    Lihat
-                  </a>
-                  <a
+                    v-if="!isPdf(row.filepond[0].extension)"
                     href="javascript(0)"
                     target="_blank"
                     class="btn btn-warning mx-2"
@@ -139,6 +134,19 @@
                     Edit
                   </a>
                   <a
+                    v-if="isPdf(row.filepond[0].extension)"
+                    :href="getPdfRouteWeb(row.id)"
+                    target="_blank"
+                    class="btn btn-danger"
+                  >
+                    <i
+                      class="fa fa-file-pdf-o"
+                      aria-hidden="true"
+                    ></i>
+                    Download
+                  </a>
+                  <a
+                    v-else
                     :href="getRouteWeb(row.id)"
                     target="_blank"
                     class="btn btn-danger"
@@ -165,6 +173,7 @@
 import dokumenService from "@/services/dokumenService";
 import { httpWeb } from "@/config/http";
 import { defineAsyncComponent } from "vue";
+import pdfThumb from "@/assets/gif/pdf.gif";
 
 export default {
   components: {
@@ -178,6 +187,8 @@ export default {
       rows: [],
       totalRecords: 0,
       register: null,
+      pdfThumb,
+      pdfExt: "pdf",
     };
   },
   created() {
@@ -196,6 +207,12 @@ export default {
     },
     editDokumen(id) {
       this.$refs.EditImageRef.showModal(id);
+    },
+    getPdfRouteWeb(id) {
+      return `${httpWeb}/pasien/${id}/pdf-type-download`;
+    },
+    isPdf(ext) {
+      return ext === this.pdfExt;
     },
     async fetchData() {
       this.$Progress.start();

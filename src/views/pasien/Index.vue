@@ -1,5 +1,8 @@
 <template>
   <div class="py-4 container-fluid">
+    <div class="bg-white p-2 rounded">
+      <Navs />
+    </div>
     <router-view
       v-slot="{Component}"
       :key="$route.fullPath"
@@ -15,5 +18,11 @@
 </template>
 
 <script>
-export default {};
+import Navs from "./Navs.vue";
+
+export default {
+  components: {
+    Navs,
+  },
+};
 </script>

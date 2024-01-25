@@ -5,7 +5,7 @@
       ref="pond"
       label-idle="Drop files here..."
       v-bind:allow-multiple="true"
-      accepted-file-types="image/jpeg, image/png"
+      accepted-file-types="image/jpeg, image/png, application/pdf"
       :instant-upload="false"
       v-bind:files="myFiles"
       @addfile="onAddfile"

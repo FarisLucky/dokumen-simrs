@@ -20,7 +20,7 @@ class DokumenController extends Controller
     {
         try {
 
-            $dokumens = Dokumen::query();
+            $dokumens = Dokumen::with('filepond');
             if (!is_null(request('register'))) {
                 $dokumens->where('dokumens.register', request('register'));
             }
