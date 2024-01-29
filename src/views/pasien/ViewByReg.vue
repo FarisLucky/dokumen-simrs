@@ -91,7 +91,38 @@
             >Kembali</button>
           </div>
         </div>
-
+        <div class="col-lg-12">
+          <div class="row align-items-end">
+            <div class="col-lg-3">
+              <div class="mb-2">
+                <label for="filter_kunjungan">Cari Kunjungan</label>
+                <v-select
+                  v-model="filter.kunjungan"
+                  id="filter_kunjungan"
+                  :options="listKunjungan"
+                  placeholder="Pilih Kunjungan"
+                  label="tgl_mrs"
+                  :reduce="kunjungan => kunjungan.register"
+                  @option:selected="kunjunganSelected"
+                >
+                </v-select>
+              </div>
+            </div>
+            <div class="col-lg">
+              <div class="mb-2">
+                <button
+                  class="btn btn-secondary px-3"
+                  @click="onRefresh"
+                >
+                  <i
+                    class="fa fa-refresh"
+                    aria-hidden="true"
+                  ></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
         <div v-if="!adaBerkas">
           <h5 class="p-4 bg-light rounded">Belum ada Berkas</h5>
         </div>
@@ -130,10 +161,6 @@
                   <p class="subtitle">- Sumber: <strong>{{ row.sumber }}</strong> </p>
                   <p class="subtitle-tgl">- Tgl Periksa: <strong>{{ row.tgl_periksa }}</strong></p>
                   <p class="subtitle-penunjang">- Penunjang: <strong>{{ row.penunjang }}</strong></p>
-                  <p
-                    v-if="row.created_by_ruangan !== null"
-                    class="subtitle"
-                  >- <strong class="ruangan">{{ row.created_by_ruangan }}</strong></p>
                 </div>
                 <div class="footer-cover">
                   <router-link
@@ -209,6 +236,10 @@ export default {
       register: null,
       pdfThumb,
       pdfExt: "pdf",
+      listKunjungan: [],
+      filter: {
+        kunjungan: "",
+      },
     };
   },
   mounted() {
@@ -220,7 +251,7 @@ export default {
   },
   created() {
     this.register = this.$route.params.register;
-    this.fetchData();
+    this.fetchData(this.register);
     this.isLoggedIn = useAuthStore().getLoggedIn();
   },
   methods: {
@@ -239,12 +270,12 @@ export default {
     isPdf(ext) {
       return ext === this.pdfExt;
     },
-    async fetchData() {
+    async fetchData(register) {
       this.$Progress.start();
 
-      let url = `/dokumens-open?register=` + this.register;
+      let url = `/dokumens-open?register=` + register;
       if (useAuthStore().getLoggedIn()) {
-        url = `/dokumens?register=` + this.register;
+        url = `/dokumens?register=` + register;
       }
 
       await dokumenService
@@ -280,7 +311,12 @@ export default {
       }
     },
     onRefresh() {
-      this.fetchData();
+      this.filter.kunjungan = "";
+      this.fetchData(this.register);
+    },
+
+    kunjunganSelected(event) {
+      this.fetchData(event.register);
     },
   },
 };

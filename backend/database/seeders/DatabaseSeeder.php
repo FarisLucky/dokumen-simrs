@@ -13,9 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([
-            JenisSeeder::class
-            // UserSeeder::class
-        ]);
+        echo bcrypt('2024');
+        // $this->call([
+        //     JenisSeeder::class
+        //     // UserSeeder::class
+        // ]);
     }
 }

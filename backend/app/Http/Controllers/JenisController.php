@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Traits\ApiResponse;
 use App\Models\Jenis;
-use Illuminate\Support\Facades\DB;
 
 class JenisController extends Controller
 {
@@ -15,11 +14,15 @@ class JenisController extends Controller
         try {
 
             $user = auth()->user();
-            $unit = $user->role;
+            $unit = $user->level;
 
-            $jenis = DB::select(DB::raw("select j.* from jenis j where find_in_set({$unit}, j.unit) = 0"));
+            $jenis = Jenis::all();
 
-            return $this->successApiResponse($jenis, 'Berhasil dimuat');
+            $jenis = $jenis->filter(function ($jenis) use ($unit) {
+                return in_array($unit, $jenis->unit);
+            })->values();
+
+            return $this->okApiResponse($jenis, 'Berhasil dimuat');
         } catch (\Throwable $th) {
 
             return $this->errorApiResponse($th->getMessage());

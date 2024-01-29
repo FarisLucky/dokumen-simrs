@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\JenisController;
+use App\Http\Controllers\KunjunganPasienController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\Web\PdfController;
 use Illuminate\Support\Facades\Route;
@@ -55,6 +56,11 @@ Route::get('dokumens-open', [DokumenController::class, 'index'])
 Route::get('dokumens-open/{id}/open', [DokumenController::class, 'show'])
     ->name('dokumen.show.open');
 Route::get('dokumens-open/by-mr/{mr}', [DokumenController::class, 'registerByRm'])
+    ->name('dokumen.showByMr.open');
+/**
+ *  List Kunjungan
+ */
+Route::get('list-kunjungan/{mr}/pasien', [KunjunganPasienController::class, 'list'])
     ->name('dokumen.showByMr.open');
 
 /**

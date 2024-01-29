@@ -38,7 +38,9 @@
             <v-select
               :options="listJenis"
               v-model="form.penunjang"
-              placeholder="Pilih Penunjang"
+              placeholder="Pilih Jenis"
+              label="nama"
+              :reduce="jenis => jenis.nama"
             ></v-select>
           </div>
         </div>
@@ -95,6 +97,7 @@ import dokumenService from "@/services/dokumenService";
 import UploadFilepond from "@/views/pasien/UploadFilepond";
 import { useAuthStore } from "@/store/auth";
 import { RAJAL, RANAP, PENDAFTARAN, ADMIN } from "@/utils/authUtils";
+import { http } from "@/config/http";
 
 const initState = () => ({
   form: {
@@ -122,8 +125,20 @@ export default {
   created() {
     this.userLevel = useAuthStore().getUser().level;
     this.isAdmin = useAuthStore().getUser().role === ADMIN;
+    this.getJenis();
   },
   methods: {
+    async getJenis() {
+      await http
+        .get("/jenis")
+        .then((resp) => {
+          console.log(resp.data.data);
+          this.listJenis = resp.data.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     async onSubmit() {
       this.$Progress.start();
 
@@ -161,7 +176,7 @@ export default {
 
       await action
         .then(() => {
-          this.$emit("fetch");
+          this.$emit("fetch", this.regist);
           this.$Progress.finish();
           this.clear();
           this.method = "POST";
@@ -176,7 +191,7 @@ export default {
             });
             alert(txt);
           } else {
-            alert(err.response.data.message + ": " + err.response.data?.error);
+            alert(err.response.data.message + ": " + err.response.data?.errors);
           }
           this.$Progress.fail();
         });

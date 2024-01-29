@@ -5,7 +5,10 @@ const get = async (url) => {
 
     return response.data
 }
+const find = async (url) => {
+    return await http.get(url)
+}
 
 export default {
-    get
+    get, find
 }

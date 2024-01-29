@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\DateTimeIdCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -35,6 +36,9 @@ class Dokumen extends Model
     ];
 
     public $casts = [
+        'tgl_mrs' => DateTimeIdCast::class,
+        'tgl_lahir' => DateTimeIdCast::class,
+        'tgl_periksa' => DateTimeIdCast::class,
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'deleted_at' => 'datetime',

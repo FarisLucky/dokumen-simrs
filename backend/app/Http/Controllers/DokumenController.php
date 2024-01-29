@@ -79,7 +79,7 @@ class DokumenController extends Controller
                 'register' => $pasien->REGISTER,
                 'created_by' => $user->id,
                 'created_by_name' => $user->name,
-                'created_by_ruangan' => $user->ruangan,
+                'created_by_ruangan' => $pasien->RUANGAN,
                 'created_by_level' => $user->level,
                 'tgl_mrs' => $pasien->TANGGAL,
                 'mr' => $pasien->MR,

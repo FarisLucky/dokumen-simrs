@@ -87,6 +87,7 @@
         </div>
       </div>
     </div>
+
     <div class="card">
       <div class="card-body">
         <router-view
@@ -97,7 +98,10 @@
             name="fade-x"
             mode="out-in"
           >
-            <component :is="Component" />
+            <component
+              :is="Component"
+              ref="viewByRegRef"
+            />
           </transition>
         </router-view>
       </div>
@@ -107,11 +111,10 @@
 
 <script>
 import pasienService from "@/services/pasienService";
+import dokumenService from "@/services/dokumenService";
 import { useAuthStore } from "@/store/auth";
-import { httpWeb } from "@/config/http";
 
 export default {
-  name: "pasien-table",
   data() {
     return {
       form: {
@@ -122,48 +125,44 @@ export default {
         tanggal: "",
         diagnosa: "",
       },
+      listKunjungan: [],
     };
   },
   created() {
     this.onRefresh();
   },
   methods: {
-    getRouteWeb(id) {
-      return `${httpWeb}/pasien/${id}/pdf-convert`;
-    },
-    routeImg(id) {
-      return `${httpWeb}/pasien/${id}/thumbnail`;
-    },
-    detailDokumen(id) {
-      this.$refs.modalViewRef.showModal(id);
-    },
-    async show(params) {
-      try {
-        this.$Progress.start();
+    show(params) {
+      this.$Progress.start();
+      let url = `/pasiens-open/${params.id}/${params.type}`;
 
-        let url = `/pasiens-open/${params.id}/${params.type}`;
-
-        if (useAuthStore().getLoggedIn()) {
-          url = `/pasiens/${params.id}/${params.type}`;
-        }
-
-        const resp = await pasienService.get(url);
-        // console.log(resp.data);
-        this.form.register = resp.data?.REGISTER;
-        this.form.mr = resp.data?.pasien?.MR ?? resp.data?.MR;
-        this.form.nama = resp.data?.pasien?.NAMA ?? resp.data?.NAMA;
-        this.form.tgl_lahir =
-          resp.data?.pasien?.TGL_LAHIR ?? resp.data?.TGL_LAHIR;
-        this.form.alamat = resp.data?.pasien?.ALAMAT ?? resp.data?.ALAMAT;
-        this.form.tanggal = resp.data?.TANGGAL;
-        this.form.ruangan = resp.data?.RUANGAN;
-
-        this.$Progress.finish();
-      } catch (error) {
-        this.$Progress.fail();
-
-        console.log(error);
+      if (useAuthStore().getLoggedIn()) {
+        url = `/pasiens/${params.id}/${params.type}`;
       }
+
+      pasienService
+        .find(url)
+        .then((resp) => {
+          this.form.register = resp.data.data?.REGISTER;
+          this.form.mr = resp.data.data?.pasien?.MR ?? resp.data.data?.MR;
+          this.form.nama = resp.data.data?.pasien?.NAMA ?? resp.data.data?.NAMA;
+          this.form.tgl_lahir =
+            resp.data.data?.pasien?.TGL_LAHIR ?? resp.data.data?.TGL_LAHIR;
+          this.form.alamat =
+            resp.data.data?.pasien?.ALAMAT ?? resp.data.data?.ALAMAT;
+          this.form.tanggal = resp.data.data?.TANGGAL;
+          this.form.ruangan = resp.data.data?.RUANGAN;
+
+          if (this.$route.name === "ViewByReg") {
+            this.getListKunjungan(this.form.mr);
+            this.$refs.viewByRegRef.filter.kunjungan = this.form.tanggal;
+          }
+          this.$Progress.finish();
+        })
+        .catch((err) => {
+          this.$Progress.fail();
+          alert(err);
+        });
     },
 
     onRefresh() {
@@ -181,6 +180,31 @@ export default {
       }
 
       this.show(params);
+    },
+
+    getListKunjungan(mr) {
+      let url = `/list-kunjungan/${mr}/pasien`;
+      dokumenService
+        .find(url)
+        .then((resp) => {
+          let kunjungan = resp.data;
+          kunjungan.every((k) => {
+            if (k.tgl_mrs !== this.form.tanggal) {
+              // jika belum ada kunjungan maka tambahkan tanggal nya
+              return false;
+            } else if (k.tgl_mrs !== this.form.tanggal) {
+              kunjungan.push({
+                register: this.form.register,
+                tgl_mrs: this.form.tanggal,
+              });
+            }
+          });
+
+          this.$refs.viewByRegRef.listKunjungan = kunjungan;
+        })
+        .catch((error) => {
+          alert(error);
+        });
     },
   },
 };

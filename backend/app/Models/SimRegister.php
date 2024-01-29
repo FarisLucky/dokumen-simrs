@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\DateTimeIdCast;
 use App\Models\Traits\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -20,6 +21,10 @@ class SimRegister extends Model
     protected $table = 'daftar';
 
     protected $primaryKey = 'register';
+
+    public $casts = [
+        'TANGGAL' => DateTimeIdCast::class,
+    ];
 
     public function scopeJoinPasien($query)
     {

@@ -26,7 +26,6 @@
   display: inline-block;
   padding-bottom: 0.4rem;
   margin-bottom: 0.8rem;
-  border-bottom: 1px solid #67676773;
 }
 .subtitle,
 .subtitle-tgl,
@@ -114,10 +113,6 @@ i.by-ruangan {
                   <p class="subtitle">- Sumber: <strong>{{ row.sumber }}</strong> </p>
                   <p class="subtitle-tgl">- Tgl Periksa: <strong>{{ row.tgl_periksa }}</strong></p>
                   <p class="subtitle-penunjang">- Penunjang: <b>{{ row.penunjang }}</b></p>
-                  <i
-                    class="by-ruangan"
-                    v-if="row.created_by_ruangan !== null"
-                  >{{ row.created_by_ruangan }}</i>
                 </div>
                 <div class="footer-cover">
                   <a
