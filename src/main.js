@@ -12,6 +12,7 @@ import { createPinia } from 'pinia'
 import VueLazyload from "vue-lazyload";
 import VueImgOrientationChanger from "vue-img-orientation-changer";
 
+// import the necessary css file
 const options = {
 
     color: "#F56565",
@@ -32,19 +33,19 @@ const errorimage = require('./assets/img/error.gif')
 
 const pinia = createPinia()
 
-const appInstance = createApp(App);
-appInstance.use(pinia);
-appInstance.use(store);
-appInstance.use(router);
-appInstance.use(ArgonDashboard);
-appInstance.use(VueProgressBar, options);
-appInstance.use(VueLazyload, {
+const app = createApp(App);
+app.use(pinia);
+app.use(store);
+app.use(router);
+app.use(ArgonDashboard);
+app.use(VueProgressBar, options);
+app.use(VueLazyload, {
     preLoad: 1.3,
     error: errorimage,
     loading: loadimage,
     attempt: 1
 })
-appInstance.use(VueImgOrientationChanger);
-appInstance.component("v-select", vSelect);
-appInstance.mount("#app");
+app.use(VueImgOrientationChanger);
+app.component("v-select", vSelect);
+app.mount("#app");
 
