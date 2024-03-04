@@ -142,6 +142,13 @@ export default {
           },
         },
         {
+          label: "Ruangan",
+          field: "daftar_RUANGAN",
+          filterOptions: {
+            enabled: false,
+          },
+        },
+        {
           label: "Aksi",
           field: "action",
         },

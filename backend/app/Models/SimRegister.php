@@ -33,7 +33,7 @@ class SimRegister extends Model
     }
     public function scopeSelectRegister($query)
     {
-        return $query->selectRaw('daftar.MR as daftar_MR, daftar.REGISTER as daftar_REGISTER, daftar.DIAGNOSA_MRS as daftar_DIAGNOSA_MRS, daftar.TANGGAL as daftar_TANGGAL');
+        return $query->selectRaw('daftar.MR as daftar_MR, daftar.REGISTER as daftar_REGISTER, daftar.DIAGNOSA_MRS as daftar_DIAGNOSA_MRS, daftar.TANGGAL as daftar_TANGGAL, daftar.RUANGAN as daftar_RUANGAN');
     }
 
     public function scopeRanap($query)

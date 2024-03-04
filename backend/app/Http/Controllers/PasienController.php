@@ -35,10 +35,10 @@ class PasienController extends Controller
                 $query->orderBy('daftar.crtime', 'DESC');
             });
 
-            $pasien->where(function ($query) {
-                $query->where('FLAG', SimRegister::NEW_IRJA)
-                    ->OrWhere('FLAG', SimRegister::OLD_IRJA);
-            });
+            // $pasien->where(function ($query) {
+            //     $query->where('FLAG', SimRegister::NEW_IRJA)
+            //         ->OrWhere('FLAG', SimRegister::OLD_IRJA);
+            // });
 
             $oneYear = now()->subYears(1);
 
