@@ -2,10 +2,10 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useAuthStore } from "@/store/auth";
 
-// const url = 'http://192.168.3.11/dokumen-simrs/backend/api' //WEB APACHE
-// const httpWeb = 'http://192.168.3.11/dokumen-simrs/backend' //WEB APACHE
-const url = 'http://192.168.3.9/dokumen-simrs/backend/api' //WEB APACHE
-const httpWeb = 'http://192.168.3.9/dokumen-simrs/backend' //WEB APACHE
+const url = 'http://192.168.3.11/dokumen-simrs/backend/api' //WEB APACHE
+const httpWeb = 'http://192.168.3.11/dokumen-simrs/backend' //WEB APACHE
+// const url = 'http://192.168.3.9/dokumen-simrs/backend/api' //WEB APACHE
+// const httpWeb = 'http://192.168.3.9/dokumen-simrs/backend' //WEB APACHE
 // const baseUrl = "http://localhost:8000/api"; // PHP LIVE SERVER
 
 const token =

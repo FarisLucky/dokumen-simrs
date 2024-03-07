@@ -185,7 +185,6 @@ export default {
                         }),
                         {
                             expires: 30,
-                            secure: true,
                         }
                     );
 

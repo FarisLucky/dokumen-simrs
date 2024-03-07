@@ -102,7 +102,6 @@
                   :options="listKunjungan"
                   placeholder="Pilih Kunjungan"
                   label="tgl_mrs"
-                  :reduce="kunjungan => kunjungan.register"
                   @option:selected="kunjunganSelected"
                 >
                 </v-select>
